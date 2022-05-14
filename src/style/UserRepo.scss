@@ -1,0 +1,25 @@
+.repoCard {
+  padding: 1rem;
+  border: #ccc 1px dotted;
+  margin: 0.7rem 0;
+  color: black;
+  flex: 0 0 33.333333%;
+  flex-grow: 1;
+
+  a {
+    color: black;
+  }
+  li {
+    color: black;
+    list-style-type: none;
+  }
+}
+.repoCardPopUp {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  background-color: whitesmoke;
+  border: 2px solid black;
+  padding: 32px;
+  border-radius: 12px;
+}
