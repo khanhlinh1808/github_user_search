@@ -13,11 +13,10 @@ import "./App.css";
 function App() {
   return (
     <Provider>
-      {" "}
       <Router>
-        <Link to="/">
-          <Navbar title="Github User Searching App" />
-        </Link>
+        <Navbar title="Github User Searching App">
+          <Link to="/"></Link>
+        </Navbar>
         <Routes>
           <Route exact path="/" element={<Home />} />
           <Route exact path="/about" element={<About />} />
