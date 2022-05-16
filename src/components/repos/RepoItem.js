@@ -1,33 +1,33 @@
-import PropTypes from "prop-types";
-import { useParams } from "react-router-dom";
-import { useState } from "react";
-import { ReactMarkdown } from "react-markdown/lib/react-markdown";
-import atob from "atob";
+import PropTypes from 'prop-types'
+import { useParams } from 'react-router-dom'
+import { useState } from 'react'
+import { ReactMarkdown } from 'react-markdown/lib/react-markdown'
+import atob from 'atob'
 
-import getDataApi from "../service/getDataApi";
-import "../../style/UserRepo.scss";
+import getDataApi from '../service/getDataApi'
+import '../../style/UserRepo.scss'
 
 const RepoItem = ({ repo }) => {
-  const [popupReadMe, setPopupReadMe] = useState(false);
-  const [readMeContent, setReadMeContent] = useState("");
+  const [popupReadMe, setPopupReadMe] = useState(false)
+  const [readMeContent, setReadMeContent] = useState('')
 
   const handleHidePopUp = () => {
-    setPopupReadMe(false);
-  };
+    setPopupReadMe(false)
+  }
   const handlePopUp = async () => {
-    setPopupReadMe(true);
+    setPopupReadMe(true)
     await getDataApi(
-      `https://api.github.com/repos/${login}/${repo.name}/contents/README.md`
+      `https://api.github.com/repos/${login}/${repo.name}/contents/README.md`,
     )
       .then((response) => setReadMeContent(atob(response.data.content)))
       .catch((err) =>
-        setReadMeContent("There is no README.md file in this repository")
-      );
-  };
+        setReadMeContent('There is no README.md file in this repository'),
+      )
+  }
 
-  const { login } = useParams();
+  const { login } = useParams()
   return (
-    <>
+    <div className="repoCardContainer">
       <div className="repoCard" onClick={handlePopUp}>
         <h3>
           <a href={repo.html_url}>{repo.name}</a>
@@ -47,16 +47,20 @@ const RepoItem = ({ repo }) => {
             id="repoCardPopUp"
             onClick={handleHidePopUp}
           >
-            <ReactMarkdown style={{ width: "100%" }}>
-              {readMeContent}
-            </ReactMarkdown>
+            <div className="repoCardContent">
+              <h3>README content</h3>
+              <br />
+              <hr />
+              <br />
+              <ReactMarkdown>{readMeContent}</ReactMarkdown>
+            </div>
           </div>
         </>
       )}
-    </>
-  );
-};
+    </div>
+  )
+}
 RepoItem.propTypes = {
   repo: PropTypes.object.isRequired,
-};
-export default RepoItem;
+}
+export default RepoItem

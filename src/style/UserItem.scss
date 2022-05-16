@@ -1,10 +1,17 @@
-.card {
+.card-container {
   padding: 1rem;
-  border: #ccc 1px dotted;
   margin: 0.7rem 0;
   color: black;
   flex: 0 0 33.333333%;
   flex-grow: 1;
+}
+.card {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  border: 1px solid black;
+  padding: 20px 0;
+  border-radius: 10px;
 }
 .text-center {
   text-align: center;

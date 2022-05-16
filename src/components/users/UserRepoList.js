@@ -1,45 +1,56 @@
-import { useEffect, useContext, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useEffect, useContext, useState } from 'react'
+import { Link, useParams } from 'react-router-dom'
 
-import githubContext from "../../context/Github/githubContext";
-import RepoList from "../repos/RepoList";
-import getDataApi from "../service/getDataApi";
-import { GET_USER, GET_REPOS } from "../../context/actionTypes";
-import Spinner from "../layout/Spinner";
-import "../../style/UserRepoList.scss";
+import githubContext from '../../context/Github/githubContext'
+import RepoList from '../repos/RepoList'
+import getDataApi from '../service/getDataApi'
+import { GET_USER, GET_REPOS } from '../../context/actionTypes'
+import Spinner from '../layout/Spinner'
+import '../../style/UserRepoList.scss'
 
 const UserRepoList = () => {
-  const [loading, setLoading] = useState(false);
-  const gc = useContext(githubContext);
-  const { user, repos } = gc.state;
-  const { login } = useParams();
+  const [loading, setLoading] = useState(false)
+  const [page, setPage] = useState(1)
+
+  const useGithubContext = useContext(githubContext)
+  const { user, repos } = useGithubContext.state
+  const { login } = useParams()
+
   const getUser = async () => {
-    setLoading(true);
-    const result = await getDataApi(`https://api.github.com/users/${login}`);
-    setLoading(false);
-    gc.dispatch({
+    setLoading(true)
+    const result = await getDataApi(`https://api.github.com/users/${login}`)
+    setLoading(false)
+    useGithubContext.dispatch({
       type: GET_USER,
       payload: result.data,
-    });
-  };
+    })
+  }
 
   const getRepo = async () => {
-    setLoading(true);
+    setLoading(true)
     const result = await getDataApi(
-      `https://api.github.com/users/${login}/repos?per_page=5&sort=created:asc`
-    );
-    setLoading(false);
-    gc.dispatch({
-      type: GET_REPOS,
-      payload: result.data,
-    });
-  };
+      `https://api.github.com/users/${login}/repos?&page=${page}&per_page=10`,
+    )
+
+    setLoading(false)
+    if (page === 1) {
+      useGithubContext.dispatch({
+        type: GET_REPOS,
+        payload: result.data,
+      })
+    } else {
+      useGithubContext.dispatch({
+        type: GET_USER,
+        payload: [...useGithubContext.state.repos, ...result.data],
+      })
+    }
+  }
 
   useEffect(() => {
-    getUser();
-    getRepo();
+    getUser()
+    getRepo()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [])
 
   const {
     name,
@@ -50,7 +61,22 @@ const UserRepoList = () => {
     public_gists,
     followers,
     following,
-  } = user;
+  } = user
+
+  useEffect(() => {
+    const handleScroll = () => {
+      let body = document.querySelector('body').clientHeight
+      let scrollHeight = window.scrollY + window.innerHeight
+      if (body <= Math.ceil(scrollHeight + 1)) {
+        setPage((prev) => prev + 1)
+      }
+    }
+    window.addEventListener('scroll', handleScroll)
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [])
+
   return (
     <>
       {loading && <Spinner class="search-spinner" />}
@@ -77,7 +103,7 @@ const UserRepoList = () => {
         </div>
       </div>
     </>
-  );
-};
+  )
+}
 
-export default UserRepoList;
+export default UserRepoList

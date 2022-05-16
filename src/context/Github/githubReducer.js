@@ -1,4 +1,4 @@
-import { SEARCH_USER, GET_USER, GET_REPOS } from "../actionTypes";
+import { SEARCH_USER, GET_USER, GET_REPOS } from '../actionTypes'
 
 const githubReducer = (state, action) => {
   switch (action.type) {
@@ -6,20 +6,20 @@ const githubReducer = (state, action) => {
       return {
         ...state,
         userList: action.payload,
-      };
+      }
     case GET_USER:
       return {
         ...state,
         user: action.payload,
-      };
+      }
     case GET_REPOS:
       return {
         ...state,
         repos: action.payload,
-      };
+      }
     default:
-      return state;
+      return state
   }
-};
+}
 
-export default githubReducer;
+export default githubReducer

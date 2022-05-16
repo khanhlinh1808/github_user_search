@@ -1,5 +1,5 @@
-import UserList from "../users/UserList";
-import Search from "../users/Search";
+import UserList from '../users/UserList'
+import Search from '../users/Search'
 
 const Home = () => {
   return (
@@ -7,7 +7,7 @@ const Home = () => {
       <Search />
       <UserList />
     </>
-  );
-};
+  )
+}
 
-export default Home;
+export default Home

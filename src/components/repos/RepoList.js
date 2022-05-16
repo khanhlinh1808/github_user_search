@@ -1,13 +1,13 @@
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types'
 
-import RepoItem from "./RepoItem";
+import RepoItem from './RepoItem'
 
 const RepoList = ({ repos }) => {
-  return repos.map((repo) => <RepoItem repo={repo} key={repo.id} />);
-};
+  return repos.map((repo) => <RepoItem repo={repo} key={repo.id} />)
+}
 
 RepoList.propTypes = {
   repos: PropTypes.array,
-};
+}
 
-export default RepoList;
+export default RepoList

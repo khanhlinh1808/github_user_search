@@ -1,7 +1,7 @@
-import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
+import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
 
-import "../../style/Navbar.scss";
+import '../../style/Navbar.scss'
 
 const Navbar = ({ title }) => {
   return (
@@ -18,14 +18,14 @@ const Navbar = ({ title }) => {
         </li>
       </ul>
     </nav>
-  );
-};
+  )
+}
 Navbar.defaultProps = {
-  title: "Github User Searching App",
-};
+  title: 'Github User Searching App',
+}
 
 Navbar.propTypes = {
   title: PropTypes.string.isRequired,
-};
+}
 
-export default Navbar;
+export default Navbar

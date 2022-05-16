@@ -1,11 +1,11 @@
-import { useContext } from "react";
-import UserItem from "./UserItem";
-import githubContext from "../../context/Github/githubContext";
+import { useContext } from 'react'
+import UserItem from './UserItem'
+import githubContext from '../../context/Github/githubContext'
 
-import "../../style/UserList.scss";
+import '../../style/UserList.scss'
 const UserList = () => {
-  const gc = useContext(githubContext);
-  const { userList } = gc.state;
+  const gc = useContext(githubContext)
+  const { userList } = gc.state
 
   return (
     <div className="userListContainer">
@@ -14,7 +14,7 @@ const UserList = () => {
           userList.map((user, index) => <UserItem key={index} user={user} />)}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default UserList;
+export default UserList
