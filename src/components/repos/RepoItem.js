@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import { useParams } from "react-router-dom";
 import { useState } from "react";
+import { ReactMarkdown } from "react-markdown/lib/react-markdown";
 import atob from "atob";
 
 import getDataApi from "../service/getDataApi";
@@ -46,7 +47,9 @@ const RepoItem = ({ repo }) => {
             id="repoCardPopUp"
             onClick={handleHidePopUp}
           >
-            {readMeContent}
+            <ReactMarkdown style={{ width: "100%" }}>
+              {readMeContent}
+            </ReactMarkdown>
           </div>
         </>
       )}
