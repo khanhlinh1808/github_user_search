@@ -1,12 +1,72 @@
 import { useEffect, useContext, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
+import styled from 'styled-components'
 
 import githubContext from '../../context/Github/githubContext'
 import RepoList from '../repos/RepoList'
 import getDataApi from '../service/getDataApi'
 import { GET_USER, GET_REPOS } from '../../context/actionTypes'
 import Spinner from '../layout/Spinner'
-import '../../style/UserRepoList.scss'
+
+const StyledUserInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+  a {
+    display: flex;
+    justify-content: center;
+    color: black;
+  }
+  .UserBasicInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .avatar-user {
+    width: 200px;
+    height: auto;
+    border-radius: 50%;
+    margin-top: 5px;
+    margin-bottom: 20px;
+  }
+  h3,
+  h5 {
+    color: black;
+  }
+  .UserRepoInfo {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 20px;
+    li {
+      color: black;
+      list-style-type: none;
+    }
+  }
+`
+const StyledRepoListContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  .RepoList {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 80%;
+  }
+`
+
+const StyledBackButton = styled.button`
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  font-size: 12px;
+  margin-top: 30px;
+  cursor: pointer;
+  background-color: black;
+  padding: 10px 24px;
+  border-radius: 8px;
+  margin-left: 5%;
+`
 
 const UserRepoList = () => {
   const [loading, setLoading] = useState(false)
@@ -49,7 +109,6 @@ const UserRepoList = () => {
   useEffect(() => {
     getUser()
     getRepo()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const {
@@ -81,9 +140,9 @@ const UserRepoList = () => {
     <>
       {loading && <Spinner class="search-spinner" />}
       <Link to="/">
-        <button className="btn-back">Back</button>
+        <StyledBackButton className="btn-back">Back</StyledBackButton>
       </Link>
-      <div className="UserInfo">
+      <StyledUserInfo className="UserInfo">
         <div className="UserBasicInfo">
           <img src={avatar_url} alt="userAvatar" className="avatar-user" />
           <h3>{name}</h3>
@@ -96,12 +155,12 @@ const UserRepoList = () => {
           <li>Following: {following}</li>
         </ul>
         <a href={html_url}>Visit github profile</a>
-      </div>
-      <div className="RepoListContainer">
+      </StyledUserInfo>
+      <StyledRepoListContainer className="RepoListContainer">
         <div className="RepoList">
           <RepoList repos={repos} />
         </div>
-      </div>
+      </StyledRepoListContainer>
     </>
   )
 }

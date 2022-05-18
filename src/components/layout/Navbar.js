@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types'
-import { Link } from 'react-router-dom'
-
+import { Link, NavLink } from 'react-router-dom'
 import '../../style/Navbar.scss'
 
 const Navbar = ({ title }) => {
@@ -11,10 +10,22 @@ const Navbar = ({ title }) => {
           <Link to="/">{title}</Link>
         </li>
         <li className="item">
-          <Link to="/">Home</Link>
+          <NavLink
+            to="/"
+            className={({ isActive }) => (isActive ? 'active-style' : 'none')}
+            style={{ padding: '0 5px 10px 5px' }}
+          >
+            Home
+          </NavLink>
         </li>
         <li className="item">
-          <Link to="/about">About</Link>
+          <NavLink
+            to="/about"
+            className={({ isActive }) => (isActive ? 'active-style' : 'none')}
+            style={{ padding: '0 5px 10px 5px' }}
+          >
+            About
+          </NavLink>
         </li>
       </ul>
     </nav>

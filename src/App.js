@@ -6,7 +6,7 @@ import NotFound from './components/pages/NotFound'
 
 import UserRepoList from './components/users/UserRepoList'
 import Provider from './context/Provider'
-import './App.css'
+import './App.scss'
 
 function App() {
   return (
@@ -25,4 +25,3 @@ function App() {
 }
 
 export default App
-

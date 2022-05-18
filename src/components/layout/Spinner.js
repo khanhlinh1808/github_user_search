@@ -1,11 +1,10 @@
-import spinnerGif from './spinning-loading.gif'
 const Spinner = () => {
   return (
     <>
       <img
-        src={spinnerGif}
+        src="https://i.gifer.com/ZZ5H.gif"
         alt="loading"
-        style={{ width: '200px', margin: 'auto', display: 'block' }}
+        style={{ width: '50px', margin: '20px auto', display: 'block' }}
       />
     </>
   )
