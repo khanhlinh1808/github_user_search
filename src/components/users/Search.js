@@ -7,6 +7,8 @@ import getDataApi from '../service/getDataApi'
 import { SEARCH_USER } from '../../context/actionTypes'
 import Spinner from '../../components/layout/Spinner'
 
+const ADDITIONAL_HEIGHT = 1
+
 const StyledSearchContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -17,9 +19,6 @@ const StyledSearchContainer = styled.div`
     justify-content: center;
     align-items: center;
     position: relative;
-  }
-  h2 {
-    color: gray;
   }
   .logo-img {
     width: 150px;
@@ -86,6 +85,7 @@ const Search = () => {
     if (text) {
       getUserList()
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [text, page])
 
   useEffect(() => {
@@ -96,7 +96,7 @@ const Search = () => {
     const handleScroll = () => {
       const body = document.querySelector('body').clientHeight
       const scrollHeight = window.scrollY + window.innerHeight
-      if (body <= Math.ceil(scrollHeight) + 1) {
+      if (body <= Math.ceil(scrollHeight) + ADDITIONAL_HEIGHT) {
         setPage((prev) => prev + 1)
       }
     }
@@ -113,7 +113,6 @@ const Search = () => {
         alt="logo-img"
         className="logo-img"
       />
-      <h2>WHO ARE YOU SEARCHING FOR ?</h2>
       <form className="searchForm">
         <input
           type="text"

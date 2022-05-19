@@ -4,7 +4,7 @@ import styled from 'styled-components'
 
 const StyledCardContainer = styled.div`
   padding: 1rem;
-  margin: 0.7rem 0;
+  margin: 20px 0;
   color: black;
   flex: 0 0 33.333333%;
   flex-grow: 1;
@@ -12,9 +12,17 @@ const StyledCardContainer = styled.div`
     display: flex;
     align-items: center;
     flex-direction: column;
-    border: 1px solid black;
+    border: 1px solid #171c26;
     padding: 20px 0;
     border-radius: 10px;
+    border-radius: 5px;
+    box-shadow: 0px 10px 20px -10px rgba(0, 0, 0, 0.75);
+    color: #b3b8cd;
+    .card-login,
+    .card-location {
+      color: white;
+      font-size: 16px;
+    }
   }
   .text-center {
     text-align: center;
@@ -22,23 +30,25 @@ const StyledCardContainer = styled.div`
   .round-img {
     border-radius: 50%;
     margin-top: 5px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
+    border: 4px solid #78259e;
   }
 
-  button {
+  .card-button {
+    background-color: #78259e;
+    border: 1px solid #78259e;
+    border-radius: 3px;
     color: white;
-    text-align: center;
-    text-decoration: none;
-    font-size: 12px;
-    margin-top: 20px;
+    font-family: Montserrat, sans-serif;
+    font-weight: 500;
+    padding: 10px 25px;
+    margin: 15px 10px;
     cursor: pointer;
-    background-color: black;
-    padding: 10px 24px;
-    border-radius: 8px;
   }
 `
 
-const UserItem = ({ user: { login, avatar_url } }) => {
+const UserItem = ({ user: { login, avatar_url, type } }) => {
+  console.log(login, avatar_url, type)
   return (
     <StyledCardContainer className="card-container">
       <div className="card">
@@ -50,7 +60,7 @@ const UserItem = ({ user: { login, avatar_url } }) => {
         />
         <div className="card-login">{login}</div>
         <Link to={`user/${login}`}>
-          <button>More...</button>
+          <button className="card-button">More</button>
         </Link>
       </div>
     </StyledCardContainer>

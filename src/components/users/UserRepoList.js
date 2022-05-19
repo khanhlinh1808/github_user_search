@@ -1,5 +1,5 @@
 import { useEffect, useContext, useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import styled from 'styled-components'
 
 import githubContext from '../../context/Github/githubContext'
@@ -10,38 +10,53 @@ import Spinner from '../layout/Spinner'
 
 const StyledUserInfo = styled.div`
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 50px;
   a {
     display: flex;
     justify-content: center;
-    color: black;
+    color: white;
   }
   .UserBasicInfo {
     display: flex;
     flex-direction: column;
     align-items: center;
-  }
-  .avatar-user {
-    width: 200px;
-    height: auto;
-    border-radius: 50%;
-    margin-top: 5px;
-    margin-bottom: 20px;
-  }
-  h3,
-  h5 {
-    color: black;
-  }
-  .UserRepoInfo {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
-    margin-top: 20px;
-    li {
-      color: black;
-      list-style-type: none;
+    .avatar-user {
+      width: 200px;
+      height: auto;
+      border-radius: 50%;
+      margin-top: 5px;
+      margin-bottom: 20px;
+      border: 4px solid #78259e;
     }
+  }
+  .UserRepoInfoContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-left: 100px;
+    .UserRepoInfo {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      li {
+        margin-top: 40px;
+        margin-bottom: 25px;
+        list-style-type: none;
+        padding: 0px 15px;
+        color: white;
+      }
+      a {
+        width: 50%;
+      }
+    }
+  }
+  h3 {
+    color: white;
   }
 `
 const StyledRepoListContainer = styled.div`
@@ -55,17 +70,23 @@ const StyledRepoListContainer = styled.div`
   }
 `
 
-const StyledBackButton = styled.button`
+const StyledButton = styled.button`
+  background-color: #78259e;
+  border: 1px solid #78259e;
+  border-radius: 3px;
   color: white;
-  text-align: center;
-  text-decoration: none;
-  font-size: 12px;
-  margin-top: 30px;
+  font-family: 'Ubuntu', sans-serif;
+  font-weight: 500;
+  padding: 10px 25px;
+  margin: 15px 10px;
   cursor: pointer;
-  background-color: black;
-  padding: 10px 24px;
-  border-radius: 8px;
-  margin-left: 5%;
+`
+
+const StyledHeader = styled.h4`
+  padding-top: 50px;
+  color: white;
+  font-style: italic;
+  text-align: center;
 `
 
 const UserRepoList = () => {
@@ -109,6 +130,7 @@ const UserRepoList = () => {
   useEffect(() => {
     getUser()
     getRepo()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const {
@@ -116,7 +138,6 @@ const UserRepoList = () => {
     avatar_url,
     html_url,
     public_repos,
-    bio,
     public_gists,
     followers,
     following,
@@ -139,23 +160,27 @@ const UserRepoList = () => {
   return (
     <>
       {loading && <Spinner class="search-spinner" />}
-      <Link to="/">
-        <StyledBackButton className="btn-back">Back</StyledBackButton>
-      </Link>
       <StyledUserInfo className="UserInfo">
         <div className="UserBasicInfo">
           <img src={avatar_url} alt="userAvatar" className="avatar-user" />
-          <h3>{name}</h3>
-          <h5>{bio}</h5>
+          <h3>{login}</h3>
         </div>
-        <ul className="UserRepoInfo">
-          <li>Public repos: {public_repos}</li>
-          <li>Public gists: {public_gists}</li>
-          <li>Follower: {followers}</li>
-          <li>Following: {following}</li>
-        </ul>
-        <a href={html_url}>Visit github profile</a>
+        <div className="UserRepoInfoContainer">
+          <h3>{name}</h3>
+          <ul className="UserRepoInfo">
+            <li>Public repos: {public_repos}</li>
+            <li>Public gists: {public_gists}</li>
+            <li>Follower: {followers}</li>
+            <li>Following: {following}</li>
+          </ul>
+          <StyledButton>
+            <a href={html_url}>Visit github profile</a>
+          </StyledButton>
+        </div>
       </StyledUserInfo>
+      <StyledHeader>
+        Click on a repository to read its README.md files
+      </StyledHeader>
       <StyledRepoListContainer className="RepoListContainer">
         <div className="RepoList">
           <RepoList repos={repos} />
