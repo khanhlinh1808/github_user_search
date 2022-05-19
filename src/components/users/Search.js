@@ -36,6 +36,7 @@ const StyledSearchContainer = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    font-family: 'Ubuntu', sans-serif;
   }
 
   input[type='text'] {
