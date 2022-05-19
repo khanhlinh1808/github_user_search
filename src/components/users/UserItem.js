@@ -39,11 +39,11 @@ const StyledCardContainer = styled.div`
     border: 1px solid #78259e;
     border-radius: 3px;
     color: white;
-    font-family: Montserrat, sans-serif;
     font-weight: 500;
     padding: 10px 25px;
     margin: 15px 10px;
     cursor: pointer;
+    font-family: 'Ubuntu', sans-serif;
   }
 `
 

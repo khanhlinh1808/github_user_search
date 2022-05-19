@@ -50,9 +50,11 @@ const StyledNavbar = styled.nav`
   .item.active {
     display: block;
   }
-  .menu.responsive a.toggle {
+
+  .menu.responsive li.toggle {
     right: 0;
     top: 0;
+    cursor: pointer;
   }
   .menu.responsive {
     li {
@@ -98,7 +100,7 @@ const StyledNavbar = styled.nav`
   }
 `
 
-function handleResponsiveNavbar() {
+const handleResponsiveNavbar = () => {
   var x = document.getElementById('myMenu')
   if (x.className === 'menu') {
     x.className += ' responsive'
@@ -133,7 +135,7 @@ const Navbar = ({ title }) => {
           </NavLink>
         </li>
         <li className="toggle" onClick={handleResponsiveNavbar}>
-          <a href="#">Menu</a>
+          Menu
         </li>
       </ul>
     </StyledNavbar>

@@ -99,7 +99,7 @@ const UserRepoList = () => {
 
   const getUser = async () => {
     setLoading(true)
-    const result = await getDataApi(`https://api.github.com/users/${login}`)
+    const result = await getDataApi(`/users/${login}`)
     setLoading(false)
     useGithubContext.dispatch({
       type: GET_USER,
@@ -110,7 +110,7 @@ const UserRepoList = () => {
   const getRepo = async () => {
     setLoading(true)
     const result = await getDataApi(
-      `https://api.github.com/users/${login}/repos?&page=${page}&per_page=10`,
+      `/users/${login}/repos?&page=${page}&per_page=30`,
     )
 
     setLoading(false)

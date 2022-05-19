@@ -67,7 +67,7 @@ const Search = () => {
   const getUserList = async () => {
     setLoading(true)
     const result = await getDataApi(
-      `https://api.github.com/search/users?q=${text}&page=${page}&per_page=10`,
+      `/search/users?q=${text}&page=${page}&per_page=10`,
     )
     setLoading(false)
     if (page === 1) {

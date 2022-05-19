@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 import { useParams } from 'react-router-dom'
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { ReactMarkdown } from 'react-markdown/lib/react-markdown'
 import atob from 'atob'
 import styled from 'styled-components'
@@ -114,15 +114,23 @@ const RepoItem = ({ repo }) => {
   const [popupReadMe, setPopupReadMe] = useState(false)
   const [readMeContent, setReadMeContent] = useState('')
   const { login } = useParams()
+  const redirect = useRef()
+
+  useEffect(() => {
+    const redirectStatus = redirect.current
+    const handleClick = (e) => {
+      e.stopPropagation()
+    }
+    redirectStatus.addEventListener('click', handleClick)
+    return () => redirectStatus.removeEventListener('click', handleClick)
+  }, [])
 
   const handleHidePopUp = () => {
     setPopupReadMe(false)
   }
   const handlePopUp = async () => {
     setPopupReadMe(true)
-    await getDataApi(
-      `https://api.github.com/repos/${login}/${repo.name}/contents/README.md`,
-    )
+    await getDataApi(`/repos/${login}/${repo.name}/contents/README.md`)
       .then((response) => setReadMeContent(atob(response.data.content)))
       .catch((err) =>
         setReadMeContent('There is no README.md file in this repository'),
@@ -143,7 +151,9 @@ const RepoItem = ({ repo }) => {
             </ul>
           </div>
           <StyledButton>
-            <a href={repo.html_url}>Go to this Repo on Github</a>
+            <a ref={redirect} href={repo.html_url}>
+              Go to this Repo on Github
+            </a>
           </StyledButton>
         </div>
       </div>
