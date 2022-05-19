@@ -47,8 +47,7 @@ const StyledCardContainer = styled.div`
   }
 `
 
-const UserItem = ({ user: { login, avatar_url, type } }) => {
-  console.log(login, avatar_url, type)
+const UserItem = ({ user: { login, avatar_url } }) => {
   return (
     <StyledCardContainer className="card-container">
       <div className="card">

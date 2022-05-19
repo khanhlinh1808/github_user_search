@@ -4,12 +4,10 @@ import styled from 'styled-components'
 
 const StyledNavbar = styled.nav`
   padding: 15px 40px;
-  a {
-    color: white;
-    text-decoration: none;
-  }
+  a,
   li {
     color: white;
+    text-decoration: none;
   }
   .menu {
     list-style-type: none;

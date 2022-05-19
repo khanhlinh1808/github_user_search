@@ -1,9 +1,9 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+
 import Home from './components/pages/Home'
 import About from './components/pages/About'
 import Navbar from './components/layout/Navbar'
 import NotFound from './components/pages/NotFound'
-
 import UserRepoList from './components/users/UserRepoList'
 import Provider from './context/Provider'
 import './style/App.scss'
