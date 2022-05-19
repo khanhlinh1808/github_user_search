@@ -14,6 +14,7 @@ const StyledSearchContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  margin-top: 20px;
   .searchForm {
     display: flex;
     justify-content: center;

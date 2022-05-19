@@ -29,113 +29,88 @@ const StyledNavbar = styled.nav`
   .active-style {
     border-bottom: 3px solid #413853;
   }
-  /* Mobile menu */
   .menu {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
   }
-  .menu li a {
-    display: block;
-  }
-
   .toggle {
     order: 1;
-    font-size: 20px;
   }
   .item.button {
     order: 2;
   }
   .item {
-    order: 3;
     width: 100%;
     text-align: center;
+    order: 3;
     display: none;
   }
-  .active .item {
+  .item.active {
     display: block;
   }
-  .button.secondary {
-    border-bottom: 1px #444 solid;
+  .menu.responsive a.toggle {
+    right: 0;
+    top: 0;
   }
-  @media all and (min-width: 700px) {
+  .menu.responsive {
+    li {
+      float: none;
+      display: block;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+  }
+  @media (min-width: 600px) {
     .menu {
       justify-content: center;
+      background-color: none;
     }
     .logo {
       flex: 1;
     }
-    .item.button {
-      width: auto;
-      order: 1;
-      display: block;
-    }
     .toggle {
       flex: 1;
       text-align: right;
+    }
+    .toggle {
       order: 2;
     }
-    .menu li.button a {
-      padding: 10px 15px;
-      margin: 5px 0;
-    }
-    .button a {
-      background: #0080ff;
-      border: 1px royalblue solid;
-    }
-    .button.secondary {
-      border: 0;
-    }
-    .button.secondary a {
-      background: transparent;
-      border: 1px #0080ff solid;
-    }
-    .button a:hover {
-      text-decoration: none;
-    }
-    .button:not(.secondary) a:hover {
-      background: royalblue;
-      border-color: darkblue;
-    }
   }
-  @media all and (min-width: 960px) {
-    .menu {
-      align-items: flex-start;
-      flex-wrap: nowrap;
-      background: none;
+  @media (min-width: 900px) {
+    .item {
+      display: block;
+      width: auto;
+    }
+    .toggle {
+      display: none;
     }
     .logo {
       order: 0;
     }
     .item {
       order: 1;
-      position: relative;
-      display: block;
-      width: auto;
     }
-    .button {
-      order: 2;
-    }
-    .submenu-active .submenu {
-      display: block;
-      position: absolute;
-      left: 0;
-      top: 68px;
-      background: #111;
-    }
-    .toggle {
-      display: none;
-    }
-    .submenu-active {
-      border-radius: 0;
+    .menu li {
+      padding: 15px 10px;
     }
   }
 `
+
+function handleResponsiveNavbar() {
+  var x = document.getElementById('myMenu')
+  if (x.className === 'menu') {
+    x.className += ' responsive'
+  } else {
+    x.className = 'menu'
+  }
+}
+
 const Navbar = ({ title }) => {
   return (
     <StyledNavbar>
-      <ul className="menu">
+      <ul className="menu" id="myMenu">
         <li className="logo">
           <Link to="/">{title}</Link>
         </li>
@@ -157,10 +132,14 @@ const Navbar = ({ title }) => {
             About
           </NavLink>
         </li>
+        <li className="toggle" onClick={handleResponsiveNavbar}>
+          <a href="#">Menu</a>
+        </li>
       </ul>
     </StyledNavbar>
   )
 }
+
 Navbar.defaultProps = {
   title: 'Github User Searching App',
 }

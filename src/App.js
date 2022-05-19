@@ -7,7 +7,6 @@ import NotFound from './components/pages/NotFound'
 import UserRepoList from './components/users/UserRepoList'
 import Provider from './context/Provider'
 import './style/App.scss'
-import './style/_reset.scss'
 
 function App() {
   return (
